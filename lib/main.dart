@@ -15,7 +15,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.deepPurple,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
       home: MyHomePage(),
@@ -35,19 +35,21 @@ class MyHomePage extends StatelessWidget {
       appBar: AppBar(
         title: Text("Hello"),
       ),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          Card(
-            child: Container(
-                width: double.infinity,
-                height: 25,
-                color: Colors.deepPurpleAccent,
-                child: Text('CHART!')),
-          ),
-          UserTransactions()
-        ],
+      body: SingleChildScrollView(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            Card(
+              child: Container(
+                  width: double.infinity,
+                  height: 25,
+                  color: Colors.deepPurpleAccent,
+                  child: Text('CHART!')),
+            ),
+            UserTransactions()
+          ],
+        ),
       ),
       // This trailing comma makes auto-formatting nicer for build methods.
     );
