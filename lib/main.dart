@@ -1,3 +1,5 @@
+import './widgets/user_transactions.dart';
+
 import './widgets/new_transactions.dart';
 import './widgets/transaction_list.dart';
 import 'package:flutter/material.dart';
@@ -44,8 +46,7 @@ class MyHomePage extends StatelessWidget {
                 color: Colors.deepPurpleAccent,
                 child: Text('CHART!')),
           ),
-          NewTransaction(),
-          TransactionList(),
+          UserTransactions()
         ],
       ),
       // This trailing comma makes auto-formatting nicer for build methods.
