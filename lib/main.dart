@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
                   // ignore: deprecated_member_use
                   title: TextStyle(
                 fontFamily: 'OpenSans',
-                fontSize: 20,
+                fontSize: 18,
               )),
         ),
         fontFamily: 'Quicksand',
@@ -42,7 +42,7 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   final List<Transaction> _userTransactions = [
-    Transaction(
+    /*Transaction(
       id: "t1",
       amount: 69.99,
       date: DateTime.now(),
@@ -59,7 +59,7 @@ class _MyHomePageState extends State<MyHomePage> {
       amount: 49.99,
       date: DateTime.now(),
       title: "New something else",
-    ),
+    ),*/
   ];
 
   void _addNewTransaction(String txTitle, double txAmount) {
