@@ -12,8 +12,17 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Personal Expenses',
       theme: ThemeData(
+        appBarTheme: AppBarTheme(
+          textTheme: ThemeData.light().textTheme.copyWith(
+                  // ignore: deprecated_member_use
+                  title: TextStyle(
+                fontFamily: 'OpenSans',
+                fontSize: 20,
+              )),
+        ),
+        fontFamily: 'Quicksand',
         primarySwatch: Colors.deepPurple,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
@@ -25,15 +34,13 @@ class MyApp extends StatelessWidget {
 class MyHomePage extends StatefulWidget {
   //String titleInput;
   //String amountInput;
- // final titleController = TextEditingController();
- // final amountController = TextEditingController();
+  // final titleController = TextEditingController();
+  // final amountController = TextEditingController();
   @override
   _MyHomePageState createState() => _MyHomePageState();
 }
 
-class _MyHomePageState extends State<MyHomePage>{
-
-
+class _MyHomePageState extends State<MyHomePage> {
   final List<Transaction> _userTransactions = [
     Transaction(
       id: "t1",
@@ -74,15 +81,17 @@ class _MyHomePageState extends State<MyHomePage>{
   }*/
 
   void _startAddNewTransaction(BuildContext ctx) {
-    showModalBottomSheet(context: ctx, builder: (_) {
-      return GestureDetector(
-        onTap: () {},
-        child: GestureDetector(
-            behavior: HitTestBehavior.opaque,
-            onTap: () {},
-            child: NewTransaction(_addNewTransaction)),
-      );
-    },
+    showModalBottomSheet(
+      context: ctx,
+      builder: (_) {
+        return GestureDetector(
+          onTap: () {},
+          child: GestureDetector(
+              behavior: HitTestBehavior.opaque,
+              onTap: () {},
+              child: NewTransaction(_addNewTransaction)),
+        );
+      },
     );
   }
 
@@ -90,9 +99,15 @@ class _MyHomePageState extends State<MyHomePage>{
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Hello"),
+        title: Text(
+          "Hello",
+          style: TextStyle(fontFamily: 'Open Sans'),
+        ),
         actions: <Widget>[
-          IconButton(icon: Icon(Icons.add), onPressed: () => _startAddNewTransaction(context),)
+          IconButton(
+            icon: Icon(Icons.add),
+            onPressed: () => _startAddNewTransaction(context),
+          )
         ],
       ),
       body: SingleChildScrollView(
@@ -103,7 +118,7 @@ class _MyHomePageState extends State<MyHomePage>{
             Container(
               width: double.infinity,
               child: Card(
-                color: Colors.blue,
+                color: Theme.of(context).accentColor,
                 child: Text('CHART!'),
                 elevation: 5,
               ),
@@ -113,7 +128,10 @@ class _MyHomePageState extends State<MyHomePage>{
         ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-      floatingActionButton: FloatingActionButton(child: Icon(Icons.add), onPressed: () => _startAddNewTransaction(context),),
+      floatingActionButton: FloatingActionButton(
+        child: Icon(Icons.add),
+        onPressed: () => _startAddNewTransaction(context),
+      ),
       // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
