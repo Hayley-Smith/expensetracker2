@@ -1,3 +1,4 @@
+import './widgets/chart.dart';
 import './widgets/new_transactions.dart';
 import './widgets/transaction_list.dart';
 import 'package:flutter/material.dart';
@@ -14,18 +15,27 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Personal Expenses',
       theme: ThemeData(
-        appBarTheme: AppBarTheme(
+          primarySwatch: Colors.purple,
+          accentColor: Colors.amber,
+          fontFamily: 'Quicksand',
           textTheme: ThemeData.light().textTheme.copyWith(
-                  // ignore: deprecated_member_use
-                  title: TextStyle(
+            // ignore: deprecated_member_use
+            title: TextStyle(
+              fontFamily: 'OpenSans',
+              fontWeight: FontWeight.bold,
+              fontSize: 18,
+            ),
+          ),
+          appBarTheme: AppBarTheme(
+            textTheme: ThemeData.light().textTheme.copyWith(
+              // ignore: deprecated_member_use
+              title: TextStyle(
                 fontFamily: 'OpenSans',
-                fontSize: 18,
-              )),
-        ),
-        fontFamily: 'Quicksand',
-        primarySwatch: Colors.deepPurple,
-        visualDensity: VisualDensity.adaptivePlatformDensity,
-      ),
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          )),
       home: MyHomePage(),
     );
   }
@@ -62,6 +72,16 @@ class _MyHomePageState extends State<MyHomePage> {
     ),*/
   ];
 
+  List<Transaction> get _recentTransactions {
+    return _userTransactions.where((tx) {
+      return tx.date.isAfter(
+        DateTime.now().subtract(
+          Duration(days: 7),
+        ),
+      );
+    }).toList();
+  }
+
   void _addNewTransaction(String txTitle, double txAmount) {
     final newTx = Transaction(
       title: txTitle,
@@ -86,10 +106,8 @@ class _MyHomePageState extends State<MyHomePage> {
       builder: (_) {
         return GestureDetector(
           onTap: () {},
-          child: GestureDetector(
-              behavior: HitTestBehavior.opaque,
-              onTap: () {},
-              child: NewTransaction(_addNewTransaction)),
+          child: NewTransaction(_addNewTransaction),
+          behavior: HitTestBehavior.opaque,
         );
       },
     );
@@ -100,7 +118,7 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          "Hello",
+          "Personal Expense Tacker",
           style: TextStyle(fontFamily: 'Open Sans'),
         ),
         actions: <Widget>[
@@ -114,17 +132,9 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           //mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            Container(
-              width: double.infinity,
-              child: Card(
-                color: Theme.of(context).accentColor,
-                child: Text('CHART!'),
-                elevation: 5,
-              ),
-            ),
-            TransactionList(_userTransactions)
-          ],
+          children: <Widget>[
+            Chart(_recentTransactions),
+            TransactionList(_userTransactions)],
         ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,

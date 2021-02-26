@@ -17,6 +17,7 @@ class TransactionList extends StatelessWidget {
                 // ignore: deprecated_member_use
                 Text(
                   "No transactions added yet",
+                  // ignore: deprecated_member_use
                   style: Theme.of(context).textTheme.title,
                 ),
                 SizedBox(
@@ -36,10 +37,15 @@ class TransactionList extends StatelessWidget {
                   child: Row(
                     children: <Widget>[
                       Container(
-                        margin:
-                            EdgeInsets.symmetric(vertical: 10, horizontal: 15),
+                        margin: EdgeInsets.symmetric(
+                          vertical: 10,
+                          horizontal: 15,
+                        ),
                         decoration: BoxDecoration(
-                          border: Border.all(color: Colors.purple, width: 2),
+                          border: Border.all(
+                            color: Theme.of(context).primaryColor,
+                            width: 2,
+                          ),
                         ),
                         padding: EdgeInsets.all(10),
                         child: Text(
@@ -60,8 +66,10 @@ class TransactionList extends StatelessWidget {
                             style: Theme.of(context).textTheme.title,
                           ),
                           Text(
-                            DateFormat().format(transactions[index].date),
-                            style: TextStyle(color: Colors.grey),
+                            DateFormat.yMMMd().format(transactions[index].date),
+                            style: TextStyle(
+                              color: Colors.grey,
+                            ),
                           ),
                         ],
                       )
